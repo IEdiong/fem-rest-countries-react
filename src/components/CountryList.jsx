@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Country from './Country';
+import CountryCard from './CountryCard';
 
 class CountryList extends Component {
   state = {
@@ -18,7 +18,7 @@ class CountryList extends Component {
 
   render() {
     console.log(this.state.countries[0]);
-    return <Country />;
+    return <CountryCard />;
   }
 }
 

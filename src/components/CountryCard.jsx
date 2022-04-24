@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Country = () => {
+const CountryCard = () => {
   return <div>Country working!</div>;
 };
 
-export default Country;
+export default CountryCard;
