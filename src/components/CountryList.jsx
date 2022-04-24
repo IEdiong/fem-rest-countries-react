@@ -16,9 +16,24 @@ class CountryList extends Component {
     this.setState({ countries: data });
   }
 
+  getFavouriteCountries = (data) => {
+    const fav = ['Germany', 'United States of America', 'Brazil', 'Iceland'];
+
+    return data.filter((countryData) => fav.includes(countryData.name));
+  };
+
   render() {
-    console.log(this.state.countries[0]);
-    return <CountryCard />;
+    const favouriteCountry = this.getFavouriteCountries(this.state.countries);
+    // console.log(this.state.countries);
+    return (
+      <main className='px-4'>
+        <div className='container mx-auto flex flex-wrap justify-between gap-16'>
+          {favouriteCountry.map((countryData) => (
+            <CountryCard key={Number(countryData.numericCode)} country={countryData} />
+          ))}
+        </div>
+      </main>
+    );
   }
 }
 
