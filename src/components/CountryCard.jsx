@@ -18,7 +18,7 @@ const CountryCard = ({ country }) => {
   // const country = countryData[0];
 
   return (
-    <article className='w-72 rounded-md overflow-hidden bg-white drop-shadow-md'>
+    <article className='w-64 rounded-md overflow-hidden bg-white drop-shadow-md'>
       <div className='card-image'>
         <img className='w-full aspect-[5/3]' src={country.flags.png} alt='germany flag' />
       </div>
