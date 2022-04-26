@@ -15,6 +15,7 @@ const CountriesList = () => {
 
     fetchData(url);
   });
+
   return (
     <main className='px-4'>
       <div className='container mx-auto flex flex-wrap justify-between gap-16'>

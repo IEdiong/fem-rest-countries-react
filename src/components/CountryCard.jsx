@@ -26,7 +26,7 @@ const CountryCard = ({ country }) => {
         <h2 className='card-title font-extrabold'>{country.name}</h2>
         <ul className='card-info my-4'>
           <li className='font-semibold'>
-            Population: <span className='font-light'>{country.population}</span>
+            Population: <span className='font-light'>{new Intl.NumberFormat('en-GB', { maximumSignificantDigits: 3 }).format(country.population)}</span>
           </li>
           <li className='font-semibold'>
             Region: <span className='font-light'>{country.region}</span>
