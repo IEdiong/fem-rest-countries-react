@@ -1,40 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import CountryCard from './CountryCard';
 
-class CountryList extends Component {
-  state = {
-    url: 'https://restcountries.com/v2/all',
-    countries: [],
-  };
+const CountriesList = () => {
+  const [countries, setCountries] = useState([]);
 
-  async componentDidMount() {
-    let { url, countries: data } = this.state;
-    const response = await fetch(url);
+  useEffect(() => {
+    const url = 'https://restcountries.com/v2/all';
+    // let { url, countries: data } = this.state;
+    async function fetchData(url) {
+      const response = await fetch(url);
+      const data = await response.json();
+      setCountries(data);
+    }
 
-    data = await response.json();
+    fetchData(url);
+  });
+  return (
+    <main className='px-4'>
+      <div className='container mx-auto flex flex-wrap justify-between gap-16'>
+        {countries.map((countryData) => (
+          <CountryCard key={Number(countryData.numericCode)} country={countryData} />
+        ))}
+      </div>
+    </main>
+  );
+};
 
-    this.setState({ countries: data });
-  }
+export default CountriesList;
 
-  getFavouriteCountries = (data) => {
-    const fav = ['Germany', 'United States of America', 'Brazil', 'Iceland'];
+// Come back to this later
+/*
+getFavouriteCountries = (data) => {
+  const fav = ['Germany', 'United States of America', 'Brazil', 'Iceland'];
 
-    return data.filter((countryData) => fav.includes(countryData.name));
-  };
+  return data.filter((countryData) => fav.includes(countryData.name));
+};
 
-  render() {
-    const favouriteCountry = this.getFavouriteCountries(this.state.countries);
-    // console.log(this.state.countries);
-    return (
-      <main className='px-4'>
-        <div className='container mx-auto flex flex-wrap justify-between gap-16'>
-          {favouriteCountry.map((countryData) => (
-            <CountryCard key={Number(countryData.numericCode)} country={countryData} />
-          ))}
-        </div>
-      </main>
-    );
-  }
-}
-
-export default CountryList;
+const favouriteCountry = this.getFavouriteCountries(this.state.countries);
+// console.log(this.state.countries);
+*/
