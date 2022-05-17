@@ -6,15 +6,26 @@ const CountriesList = () => {
 
   useEffect(() => {
     const url = 'https://restcountries.com/v2/all';
-    // let { url, countries: data } = this.state;
     async function fetchData(url) {
       const response = await fetch(url);
-      const data = await response.json();
-      setCountries(data);
+      let data = await response.json();
+      let favArr = [];
+    
+      if (data) {
+        ['Germany', 'United States of America', 'Brazil', 'Iceland'].forEach((el) => {
+          let tempData = data.find((cty) => cty.name === el);
+          favArr.push(tempData);
+          data = data.filter((cty) => cty.name !== el);
+        });
+    
+        const fav = [...favArr, ...data];
+        setCountries(fav);
+      }
     }
-
+    
     fetchData(url);
-  });
+    console.log('fetch work');
+  }, []);
 
   return (
     <main className='px-4'>
@@ -28,15 +39,3 @@ const CountriesList = () => {
 };
 
 export default CountriesList;
-
-// Come back to this later
-/*
-getFavouriteCountries = (data) => {
-  const fav = ['Germany', 'United States of America', 'Brazil', 'Iceland'];
-
-  return data.filter((countryData) => fav.includes(countryData.name));
-};
-
-const favouriteCountry = this.getFavouriteCountries(this.state.countries);
-// console.log(this.state.countries);
-*/
