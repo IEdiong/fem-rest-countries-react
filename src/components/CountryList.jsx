@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CountryCard from './CountryCard';
 
-const CountriesList = () => {
+const CountriesList = ({ name }) => {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -24,8 +24,15 @@ const CountriesList = () => {
     }
     
     fetchData(url);
-    console.log('fetch work');
+    // console.log('fetch work');
   }, []);
+
+  // useEffect(() => {
+  //   const copyCountries = [...countries];
+  //   const newcopy = copyCountries.filter((country) => country.name === name);
+
+  //   setCountries(newcopy);
+  // }, [countries, name])
 
   return (
     <main className='px-4'>
@@ -39,3 +46,5 @@ const CountriesList = () => {
 };
 
 export default CountriesList;
+
+// TODO: wrapper each CountryCard in an anchor tag, making it a list of links rather than a list of CountryCard
