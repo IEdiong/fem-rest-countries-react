@@ -9,7 +9,7 @@ const SearchBar = ({ name, onSearch }) => {
       </svg>
       {/* TODO: fix the focus state */}
       <input className='w-full h-full pl-16 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500'
-      type='search'
+      type='text'
       id='search'
       placeholder='Search for a country...'
       value={name}

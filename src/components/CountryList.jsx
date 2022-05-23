@@ -27,17 +27,10 @@ const CountriesList = ({ name }) => {
     // console.log('fetch work');
   }, []);
 
-  // useEffect(() => {
-  //   const copyCountries = [...countries];
-  //   const newcopy = copyCountries.filter((country) => country.name === name);
-
-  //   setCountries(newcopy);
-  // }, [countries, name])
-
   return (
     <main className='px-4'>
       <div className='container mx-auto flex flex-wrap justify-between gap-16'>
-        {countries.map((countryData) => (
+        {countries.filter((cou) => cou.name.toLowerCase().includes(name.toLowerCase())).map((countryData) => (
           <CountryCard key={Number(countryData.numericCode)} country={countryData} />
         ))}
       </div>

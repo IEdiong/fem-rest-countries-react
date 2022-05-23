@@ -1,20 +1,24 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import CountriesToolbar from './CountriesToolbar';
 import CountriesList from './CountryList';
 
 function Countries() {
-  const [searchName, setSearchName] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const handleSearch = (countryName) => {
-    setSearchName(countryName);
-    console.log(searchName);
+    // console.log(countryName);
+    setSearchQuery(countryName);
   }
+
+  useEffect(() => {
+    document.title = 'Where in the world | Countries';
+  })
 
   return (
     <>
       <CountriesToolbar
       onSearch={handleSearch}
-      name={searchName} />
-      <CountriesList name={searchName} />
+      name={searchQuery} />
+      <CountriesList name={searchQuery} />
     </>
   );
 }
