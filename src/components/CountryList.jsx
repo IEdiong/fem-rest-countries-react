@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CountryCard from './CountryCard';
 import CountriesToolbar from './CountriesToolbar';
 
@@ -62,7 +63,10 @@ const CountriesList = () => {
         <div className='container mx-auto flex flex-wrap gap-16'>
           {isLoading && <div>Fetching data, Please wait...</div>}
           {filteredCountries.map((countryData) => (
-            <CountryCard key={Number(countryData.numericCode)} country={countryData} />
+            <Link to={countryData.name}
+            key={Number(countryData.numericCode)}>
+              <CountryCard country={countryData} />
+            </Link>
           ))}
         </div>
       </main>
