@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Filter = () => {
+const Filter = ({ regionSelected }) => {
   const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
   const [menuIsOpen, setMenuIsOpen] = useState(true);
 
@@ -54,16 +54,18 @@ To: "transform opacity-0 scale-95" */}
         <div className='py-1' role='none'>
           {/* <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" --> */}
           {regions.map((region, id) => (
-            <a 
+            <button 
             key={id}
-            href='/'
-            className='text-gray-700 block px-4 py-2 text-sm transition-all ease-in-out hover:bg-gray-100 hover:text-gray-900 hover:pl-6'
+            className='text-gray-700 block px-4 py-2 text-sm transition-all ease-in-out w-full text-left hover:bg-gray-100 hover:text-gray-900 hover:pl-6'
             role='menuitem'
             tabIndex='-1'
             id='menu-item-0'
+            onClick={() => {
+              handleToggle() 
+              return regionSelected(region)}}
             >
               {region}
-            </a>
+            </button>
           ))}
         </div>
       </div>

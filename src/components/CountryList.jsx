@@ -1,9 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import CountryCard from './CountryCard';
+import CountriesToolbar from './CountriesToolbar';
 
-const CountriesList = ({ name }) => {
+const CountriesList = () => {
   const [countries, setCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleRegionSelect = (region) => {
+    const countriesData = [...countries];
+    setFilteredCountries(countriesData.filter((cou) => cou.region === region));
+  };
+
+  const handleSearch = (countryName) => {
+    const countriesData = [...countries];
+    setSearchQuery(countryName);
+    setFilteredCountries(countriesData.filter((cou) => cou.name.toLowerCase().includes(searchQuery.toLowerCase())));
+  };
 
   useEffect(() => {
     const url = 'https://restcountries.com/v2/all';
@@ -27,21 +41,32 @@ const CountriesList = ({ name }) => {
       } catch (err) {
         console.log(err.message);
       }
-    }
+    } 
     
     fetchData(url);
     console.log('fetch work');
   }, []);
 
+  useEffect(() => {
+    setFilteredCountries(countries);
+  }, [countries])
+
+
   return (
-    <main className='px-4'>
-      <div className='container mx-auto flex flex-wrap gap-16'>
-        {isLoading && <div>Fetching data, Please wait...</div>}
-        {countries.filter((cou) => cou.name.toLowerCase().includes(name.toLowerCase())).map((countryData) => (
-          <CountryCard key={Number(countryData.numericCode)} country={countryData} />
-        ))}
-      </div>
-    </main>
+    <>
+      <CountriesToolbar
+        onSearch={handleSearch}
+        name={searchQuery}
+        regionSelected={handleRegionSelect} />
+      <main className='px-4'>
+        <div className='container mx-auto flex flex-wrap gap-16'>
+          {isLoading && <div>Fetching data, Please wait...</div>}
+          {filteredCountries.map((countryData) => (
+            <CountryCard key={Number(countryData.numericCode)} country={countryData} />
+          ))}
+        </div>
+      </main>
+    </>
   );
 };
 
